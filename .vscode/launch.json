@@ -17,7 +17,7 @@
             "mainClass": "ch.lsh.App",
             "projectName": "image-compression-test",
             "args": [
-                "/home/lsh/Documents/Coding/VSCode/sva/compression-test.png"
+                "./compression-test.png"
             ]
         },
         {
