@@ -5,6 +5,8 @@ import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 
+import ch.lsh.color.ColorAnalyser;
+
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 
@@ -20,8 +22,12 @@ public class App {
             throw new Exception("Invalid image size, image must be 800 by 600 pixels and not contain an alpha channel.");
         }
 
+        // The image seperated into its pixels
         int pixels[][][] = imageToArray(inputImage);
-        System.out.println(Arrays.toString(getPixel(399, 299, pixels)));
+        
+        int[] colorAnalysis = ColorAnalyser.determineMostCommonColor(pixels);
+
+        System.out.println(Arrays.toString(colorAnalysis));
     }
 
     private static int[] getPixel(int x, int y, int[][][] pixels) {
