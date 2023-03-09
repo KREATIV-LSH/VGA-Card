@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.Image;
-import java.net.URL;
+import java.awt.event.WindowEvent;
 
 public class LoadingFrame {
 
@@ -25,6 +25,10 @@ public class LoadingFrame {
         // Center the frame and show it
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    public void close() {
+        frame.dispose();
     }
 
 }
