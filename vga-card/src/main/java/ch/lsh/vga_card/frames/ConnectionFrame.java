@@ -35,9 +35,15 @@ public class ConnectionFrame {
         Thread th = new Thread(new Runnable() {
             @Override
             public void run() {
-                boolean status = establishCon(serialPortIndex);
-                if(status) {
-                    
+                if(establishCon(serialPortIndex)) {
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        Thread.currentThread().interrupt();
+                    }  
+                    frame.dispose();
+                    App.connectionEstablished();
                 }
             }
         });
@@ -55,7 +61,7 @@ public class ConnectionFrame {
 
     private boolean establishCon(int serialPortIndex) {
         try {
-            App.ceAgent = new ConnectionEstablisherAgent(serialPortIndex);
+            App.ceAgent = new ConnectionEstablisherAgent(serialPortIndex, App.BAUD);
             Thread.sleep(500);
             boolean success = App.ceAgent.connect();
             if(success) {
@@ -67,6 +73,7 @@ public class ConnectionFrame {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            Thread.currentThread().interrupt();
         }
         return false;
     }
