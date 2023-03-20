@@ -25,6 +25,8 @@ void setup() {
   pinMode(writeEnabled, INPUT);
 
   handleInit();
+
+  delay(2000);
 }
 
 bool handleInit() {
@@ -53,18 +55,12 @@ bool handleInit() {
 
 
 
-void handleImageMode(int mode, uint8_t * array) {
+void handleImageMode(int mode, uint8_t* array) {
   // MODE_IMAGE_SINGLE
   if (mode == 0x11) {
-    Serial.readBytes(array, 800 * 600);
+    Serial.readBytes(array, 800);
   }
 }
-
-long indexX = 0;
-long indexY = 0;
-
-long counter = 0;
-
 void loop() {
   int data = Serial.read();
   if (data == 0x1C) {
@@ -74,36 +70,27 @@ void loop() {
     Serial.write(0x0E);
     Serial.flush();
     data = Serial.read();
-
-    uint8_t imData[800*600];
-    handleImageMode(data, imData);
-    indexX = 0;
-    indexY = 0;
-    counter = 0;
-
     while (true) {
-      // Wait until writing is permited
-      while (digitalRead(writeEnabled) != 0)
-        ;
-      while (digitalRead(writeEnabled) != 1)
-        ;
+
 
       // Writing
 
-      // building adress from x and y indecies
-      long adress = (indexX) | (indexY << 10);
+      long counter = 0;
+      for (long col = 0; col < 600; col++) {
+        uint8_t imData[800];
+        handleImageMode(0x11, imData);
+        for (long pixel = 0; pixel < 800; pixel++) {
+          // building adress from x and y indecies
+          long adress = (pixel) | (col << 10);
 
-      write(adress, imData[counter]);
+          // Wait until writing is permited
+          while (digitalRead(writeEnabled) != 0)
+            ;
+          while (digitalRead(writeEnabled) != 1)
+            ;
 
-      counter++;
-      indexX++;
-      if (indexX > 800) {
-        indexX = 0;
-        indexY++;
-        if (indexY > 600) {
-          indexY = 0;
-          indexX = 0;
-          counter = 0;
+          write(adress, imData[counter]);
+          counter++;
         }
       }
     }

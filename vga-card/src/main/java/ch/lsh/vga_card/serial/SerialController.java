@@ -92,7 +92,6 @@ public class SerialController {
                 if (a1 != OpCode.STATUS_OK)
                     return false;
             } else if(packet.equals("IMAGE_INNIT")) {
-                System.out.println("handeling image innit");
 
                 outStream.write(OpCode.PACKET_IMAGE_INNIT);
                 outStream.flush();
