@@ -6,7 +6,6 @@ import ch.lsh.vga_card.frames.LoadingFrame;
 import ch.lsh.vga_card.frames.PortSelectFrame;
 import ch.lsh.vga_card.serial.ConnectionEstablisherAgent;
 import ch.lsh.vga_card.serial.ImageModeHandler;
-import ch.lsh.vga_card.serial.OpCode;
 import ch.lsh.vga_card.serial.SerialController;
 
 /**
@@ -37,19 +36,6 @@ public class App
         lFrame.close();
 
         PortSelectFrame psFrame = new PortSelectFrame(125, 400);
-
-        // ceAgent = new ConnectionEstablisherAgent(0, BAUD);
-        // System.out.println(ceAgent.connect());
-        // connectionEstablished();
-
-        // Thread.sleep(1000);
-
-        // startTime = System.currentTimeMillis();
-        // currentImageMode = new ImageModeHandler(OpCode.MODE_IMAGE_SINGLE, new byte[800][600]);
-        // sController.addToQueue("IMAGE_INNIT");
-        // System.out.println("added to queue");
-
-        // imSFrame = new ImageSelectFrame(810, 675);
     }
 
     public static void connectionEstablished() {
