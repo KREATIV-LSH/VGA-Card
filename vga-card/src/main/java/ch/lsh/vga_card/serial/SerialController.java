@@ -114,22 +114,6 @@ public class SerialController {
         return true;
     }
 
-    // private String readLine() {
-    //     try {
-    //         char c;
-    //         String s = "";
-    //         do {
-    //             c = (char) inStream.read();
-    //             if (c == '\n')
-    //                 break;
-    //             s += c + "";
-    //         } while (c != -1);
-    //         return s;
-    //     } catch (IOException e) {
-    //     }
-    //     return "";
-    // }
-
     public BufferedWriter getOutStream() {
         return outStream;
     }

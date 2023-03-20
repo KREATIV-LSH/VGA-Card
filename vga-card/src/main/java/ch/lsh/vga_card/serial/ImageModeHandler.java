@@ -3,7 +3,6 @@ package ch.lsh.vga_card.serial;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 import ch.lsh.vga_card.App;
 
